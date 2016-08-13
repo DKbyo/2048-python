@@ -137,6 +137,8 @@
 </div>
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
 <script src="//code.angularjs.org/1.5.8/angular-resource.min.js"></script>
+<script src="{% static 'hammer.min.js'%}"></script>
+
 <script>
 	var app = angular.module('GameApp', ["ngResource"]);
 	app.factory('Game', ['$resource',
@@ -168,6 +170,20 @@
 		for(var i = 0;i<16;i++){
 			$scope.board[i] = 0;
 		}
+		var hammertime = new Hammer(document.getElementById('board'));
+		hammertime.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
+		hammertime.on('swipeleft', function(ev) {
+			$scope.process(LEFT);
+		});
+		hammertime.on('swiperight', function(ev) {
+			$scope.process(RIGHT);
+		});
+		hammertime.on('swipeup', function(ev) {
+			$scope.process(UP);
+		});
+		hammertime.on('swipedown', function(ev) {
+			$scope.process(DOWN);
+		});
 		$scope.key =function(event) {
 			console.log(event.keyCode);
 			var direction=-1;
