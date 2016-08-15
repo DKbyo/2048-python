@@ -1,3 +1,4 @@
+from __future__ import division
 def potencia10(n):
     while n%10 ==0:
         n=n/10
@@ -33,5 +34,7 @@ elif operador == '/':
     respuesta = primer / segundo
 elif operador == '%':
     respuesta = primer % segundo
-
-print("%d %s %d = %d"%(primer,operador,segundo,respuesta))
+if operador == '/':
+    print("%d %s %d = %f"%(primer,operador,segundo,respuesta)) 
+else:
+    print("%d %s %d = %d"%(primer,operador,segundo,respuesta))
